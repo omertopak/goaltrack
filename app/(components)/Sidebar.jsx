@@ -6,18 +6,21 @@ import { FaAngleRight } from "react-icons/fa";
 import { FaChevronUp } from "react-icons/fa";
 import { FaChevronDown } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
-
+import { CgDarkMode } from "react-icons/cg";
+import ThemeSwitch from '../ThemeSwitch';
 const Sidebar = () => {
     const list = {
-        "Day Planner": ["Today", "Calendar", "Add Goal"],
-        "Notes": ["All notes", "Urgent", "Removed"],
-        "Noteas": ["All notes", "Urgent", "Removed"],
-        "Noteass": ["All notes", "Urgent", "Removed"],
-        "Rock": [],
+        "Calendar": ["Reminders", "Meetings", "Studies","Events"],
+        "To-Do List": ["All notes", "Urgent", "Removed"],
+        "Notes & Ideas": ["All notes", "Urgent", "Removed"],
+        "Pomodoro Timer": [],
         "Chain": ["Chain1", "Chain2"],
+        "Statistics":[],
+        "Gantt":[],
+
         // "Profile":["aska", "reposrt"],
     }
-
+    //==========================================
     // Her bir öğe için openDown durumunu saklamak için bir obje
     const [openState, setOpenState] = useState(
         Object.keys(list).reduce((acc, key) => {
@@ -25,7 +28,6 @@ const Sidebar = () => {
             return acc;
         }, {})
     );
-
     // openState'i güncelleme fonksiyonu
     const toggleOpen = (key) => {
         setOpenState((prevState) => ({
@@ -33,9 +35,14 @@ const Sidebar = () => {
             [key]: !prevState[key], // Sadece ilgili öğenin durumunu değiştir
         }));
     };
+    //==========================================
+
+    //==========================================
+
+    //==========================================
 
     return (
-        <div className="relative flex justify-between h-screen w-full max-w-[20rem] flex-col rounded-xl bg-white bg-clip-border p-4 text-gray-700 shadow-xl shadow-blue-gray-900/5">
+        <div className="relative flex justify-between h-screen w-full max-w-[20rem] flex-col rounded-xl bg-clip-border p-4  shadow-xl shadow-blue-gray-900/5 dark:text-gray-400 text-gray-700 dark:bg-black bg-slate-200">
             <div className="p-4 mb-2">
                 <h5 className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
                     Goal Rock!
@@ -63,7 +70,7 @@ const Sidebar = () => {
                             </div>
                             {openState[mainKey] && (
                                 <div className="overflow-hidden">
-                                    <div className="block w-full py-1 font-sans text-sm antialiased font-light leading-normal text-gray-700">
+                                    <div className="block w-full py-1 font-sans text-sm antialiased font-light leading-normal text-gray-700 dark:text-gray-500">
                                         <nav className="flex min-w-[240px] flex-col gap-1 p-0 font-sans text-base font-normal text-blue-gray-700">
                                             {list[mainKey].map((subItem, index) => (
                                                 <div key={`${mainKey}-${index}`} role="button"
@@ -82,13 +89,23 @@ const Sidebar = () => {
                     ))}
                 </div>      
             </nav>
-            <div role="button"
+            <div>
+                <div role="button"
+                    className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900 ">
+                    <div className="grid mr-4 place-items-center">
+                    <ThemeSwitch/>
+                    </div>
+                    Dark Theme
+                </div>
+                <div role="button"
                     className="flex items-center w-full p-3 leading-tight transition-all rounded-lg outline-none text-start hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
                     <div className="grid mr-4 place-items-center">
                     <BiLogOut className='text-2xl'/>
                     </div>
                     Log Out
                 </div>
+            </div>
+            
         </div>
     )
 }
