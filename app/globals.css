@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Örnek: pointer-events sorunu çözmek için */
+.rbc-toolbar button {
+    pointer-events: auto;
+  }
+  

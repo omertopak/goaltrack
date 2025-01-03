@@ -12,12 +12,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-        <Providers>
       <body className="h-screen max-h-screen w-screen flex flex-row">
+        <Providers>
         <Sidebar/>
         {children}
-      </body>
         </Providers>
+      </body>
     </html>
   );
 }
