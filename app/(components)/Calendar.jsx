@@ -114,7 +114,7 @@ const Calendar = () => {
           </div>
           <ul className="space-y-4">
             {currentEvents.length <= 0 && (
-              <div className="italic text-center text-gray-400">
+              <div className="italic px-7 text-gray-400">
                 No Events Present
               </div>
             )}

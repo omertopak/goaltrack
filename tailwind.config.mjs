@@ -12,6 +12,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      transitionDuration: {
+        '2000': '2000ms',
+      },
     },
   },
   plugins: [
