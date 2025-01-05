@@ -21,8 +21,8 @@ const chains = ({ params }) => {
   return (
     <div className="flex flex-col w-full gap-5">
       <h2 className="text-4xl font-bold m-5">{chainName}</h2>
-      <div className="flex flex-row m-10">
-        <div className="mt-40 ml-10  w-3/4">
+      <div className="flex flex-row m-10 h-full">
+        <div className="mt-40 ml-10  w-3/4 ">
           <div className="flex flex-row">
             {arr.map((item) => (
               <div key={item} className="w-1/6 flex justify-between gap-10">
