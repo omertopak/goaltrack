@@ -41,9 +41,11 @@ const Calendar = () => {
     }
   }, [currentEvents]);
 
-  const handleDateClick = (selected) => {
-    setSelectedDate(selected);
-    setIsDialogOpen(true);
+  const handleDateClick = (arg) => {
+    // setSelectedDate(selected);
+    // setIsDialogOpen(true);
+    alert(arg.dateStr)
+    console.log(arg);
   };
 
   const handleEventClick = (selected) => {
@@ -98,7 +100,7 @@ const Calendar = () => {
             selectable={true} // Allow dates to be selectable.
             selectMirror={true} // Mirror selections visually.
             dayMaxEvents={true} // Limit the number of events displayed per day.
-            select={handleDateClick} // Handle date selection to create new events.
+            dateClick={handleDateClick} // Handle date selection to create new events.
             eventClick={handleEventClick} // Handle clicking on events (e.g., to delete them).
             eventsSet={(events) => setCurrentEvents(events)} // Update state with current events whenever they change.
             initialEvents={
