@@ -14,7 +14,7 @@ const ChainPage = () => {
             <div className={`${styles.slopeEnd} ${styles[gradient]}`} />
           </ParallaxLayer>
           <ParallaxLayer className={`${styles.text} ${styles.number}`} offset={offset} speed={0.3}>
-            <span>{offset + 1}</span>
+            <span className="ml-10">{offset + 1}</span>
           </ParallaxLayer>
         </>
       )
@@ -25,7 +25,9 @@ const ChainPage = () => {
         }
       }
      
-      const [pageCount, setPageCount] = useState(7)
+      const [pageCount, setPageCount] = useState(15)
+
+      
       // Sayfa açıldığında scroll işlemlerini tetiklemek için useEffect kullanıyoruz
       useEffect(() => {
         scrollPages(pageCount);
@@ -44,7 +46,7 @@ const ChainPage = () => {
       <Parallax className={styles.container} ref={parallax} pages={pageCount} horizontal>
       {
       Array.from({ length: pageCount }).map((_, i) => (
-        <Page key={i} offset={i} gradient="blue" onClick={() => scroll(i + 1)} />
+        <Page key={i} offset={i} gradient="blue"  />
       ))
     }
       </Parallax>
