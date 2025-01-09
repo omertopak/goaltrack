@@ -3,8 +3,6 @@
 import React, { useState } from 'react'
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { FaAngleRight } from "react-icons/fa";
-import { FaChevronUp } from "react-icons/fa";
-import { FaChevronDown } from "react-icons/fa";
 import { BiLogOut } from "react-icons/bi";
 import ThemeSwitch from '../ThemeSwitch';
 import Link from 'next/link';
