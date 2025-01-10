@@ -30,7 +30,7 @@ const Page = () => {
         <h2 className="text-3xl font-extrabold ">Notes</h2>
         <div className="p-4 flex flex-col h-full gap-3 mr-10">
           <textarea 
-          className="text-xl font-extrabold  h-6 resize-none overflow-hidden items-center" 
+          className="text-xl font-extrabold  h-6 resize-none overflow-hidden items-center " 
           value={editedTitle}
           onChange={(e) => setEditedTitle(e.target.value)}></textarea>
           
@@ -44,7 +44,7 @@ const Page = () => {
       </div>
       <div className="w-1/4 h-full flex flex-col justify-between">
         <div className="flex flex-col overflow-scroll scrollbar-hide">
-          <h2 className="text-2xl font-extrabold px-7">Notes</h2>
+          <h2 className="text-2xl font-extrabold px-7 ">Notes</h2>
           <ul className="space-y-2">
             {notes.map((note,index) => (
                <button 

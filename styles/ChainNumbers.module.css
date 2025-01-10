@@ -28,7 +28,7 @@
   }
   
   .slopeEnd {
-    clip-path: polygon(20% 0%, 40% 0%, 20% 80%, 0% 80%);
+    clip-path: polygon(80% 0%, 100% 0%, 50% 80%, 30% 80%);
   }
   
   .slopeBegin,

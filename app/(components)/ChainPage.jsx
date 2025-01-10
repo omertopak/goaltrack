@@ -19,7 +19,7 @@ const ChainPage = () => {
   );
 
   const parallax = useRef(null);
-  const [pageCount, setPageCount] = useState(2); // Toplam sayfa sayısı
+  const [pageCount, setPageCount] = useState(365); // Toplam sayfa sayısı
 
   const scroll = (to) => {
     if (parallax.current) {

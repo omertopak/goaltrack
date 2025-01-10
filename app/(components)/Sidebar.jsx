@@ -59,21 +59,6 @@ const Sidebar = () => {
                             <div role="button"
                                 className="flex items-center w-full p-0 leading-tight transition-all rounded-lg outline-none bg-blue-gray-50/50 text-start text-blue-gray-700 hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
                                 
-                               
-                                  {mainKey==='Calendar' ?
-                                   <Link
-                                    href="/"
-                                        type="Link"
-                                        className="flex items-center justify-between w-full p-3 font-sans text-xl antialiased font-semibold leading-snug text-left transition-colors border-b-0 select-none border-b-blue-gray-100 text-blue-gray-900 hover:text-blue-gray-900"
-                                    >
-                                        <div className="grid mr-4 place-items-center">
-                                            <FaAngleDoubleRight />
-                                        </div>
-                                        <p className="block mr-auto font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
-                                            {mainKey}
-                                        </p>
-                                    </Link>
-                                    :
                                     <Link
                                     href={`/${generateHref(mainKey)}`}
                                         type="Link"
@@ -85,7 +70,7 @@ const Sidebar = () => {
                                         <p className="block mr-auto font-sans text-base antialiased font-normal leading-relaxed text-blue-gray-900">
                                             {mainKey}
                                         </p>
-                                    </Link>}
+                                    </Link>
                                
                             </div>
                             {openState[mainKey] && (

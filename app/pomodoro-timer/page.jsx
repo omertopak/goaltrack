@@ -2,23 +2,20 @@
 import { useState, useEffect } from "react";
 
 const Page = () => {
-  const [workDuration, setWorkDuration] = useState(25 * 60); // Varsayılan 25 dakika
-  const [breakDuration, setBreakDuration] = useState(5 * 60); // Varsayılan 5 dakika
+  const [workDuration, setWorkDuration] = useState(0.05 * 60); // Varsayılan 25 dakika
+  const [breakDuration, setBreakDuration] = useState(0.10 * 60); // Varsayılan 5 dakika
+  // const [workDuration, setWorkDuration] = useState(25 * 60); // Varsayılan 25 dakika
+  // const [breakDuration, setBreakDuration] = useState(5 * 60); // Varsayılan 5 dakika
   const [isTimerRunning, setIsTimerRunning] = useState(false); // Timer'ın çalışıp çalışmadığını kontrol etmek için
-
   const [timeRemaining, setTimeRemaining] = useState(workDuration); // Geriye kalan zamanı tutar
   const [isBreakTime, setIsBreakTime] = useState(false); // Break zamanında olup olmadığını kontrol eder
-
+  const [cycle, setCycle] = useState(1)
   const handleSubmit = (e) => {
     e.preventDefault();
     setTimeRemaining(workDuration)
+    setCycle(1)
   };
 
-  //==================================
-  // Clock
-  const [time, setTime] = useState(new Date());
-  
-  
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
@@ -38,6 +35,7 @@ const Page = () => {
               return breakDuration;
             } else {
               setIsBreakTime(false);
+              setCycle(prevCount => prevCount + 0.5)
               return workDuration;
             }
           }
@@ -57,10 +55,15 @@ const Page = () => {
 
   return (
     <div className="flex w-full m-10">
-      <div className="w-3/4 h-full flex items-center justify-evenly">
-        <h2 className="text-6xl font-mono text-gray-600">
+      <div className="w-3/4 h-full flex flex-col">
+        <h2 className="text-3xl font-extrabold ">Pomodoro Timer</h2>
+        <h4 className="text-xl font-extrabold ml-5">Cycle:{cycle}</h4>
+        <div className="h-full flex items-center justify-evenly">
+          <h2 className="text-6xl font-mono text-gray-600">
           {formatTime(timeRemaining)}
         </h2>
+        </div>
+        
       </div>
       <div className="w-1/4 h-full">
         <form onSubmit={handleSubmit} className="flex flex-col h-full justify-between">

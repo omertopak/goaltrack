@@ -78,7 +78,7 @@ const Calendar = () => {
   };
 
   return (
-      <div className="flex w-full m-10">
+      <div className="flex w-full m-10 gap-5">
         <div className="w-3/4 h-full ">
           <FullCalendar
             height={"85vh"}
