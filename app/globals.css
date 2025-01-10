@@ -7,3 +7,19 @@
     pointer-events: auto;
   }
   
+
+  :root {
+    --gradient-color: rgb(148 163 184); /* Light tema için varsayılan */
+    --number-color:rgb(148 163 184);
+
+    ;
+  }
+  /* rgb(107 114 128)
+  rgb(156 163 175)
+  rgb(75 85 99) 
+  */
+  .dark {
+    --gradient-color: rgb(107 114 128); /* Dark tema için */
+    --number-color:rgb(107 114 128);
+  }
+  

@@ -28,7 +28,7 @@ const Page = () => {
   return (
     <div className="flex w-full m-10">
       <div className="w-3/4 h-full">
-        <div className="w-full flex flex-col gap-3">
+        <div className="w-full flex flex-col gap-3 h-full">
           <h2 className="text-3xl font-extrabold ">Chain</h2>
           <div className="flex items-center gap-3  ml-3">
             <h4 className="text-xl font-extrabold">{selectedButton2}</h4>
