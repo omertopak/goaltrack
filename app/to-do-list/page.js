@@ -50,8 +50,8 @@ const Page = () => {
             <h4 className="text-xl font-extrabold">{selectedButton2}</h4>
           </div>
           <ul className="flex flex-col gap-2 ml-5 mr-10">
-          {list.map((item)=>(
-             <li className="flex flex-row items-center justify-between">
+          {list.map((item,index)=>(
+             <li key={index} className="flex flex-row items-center justify-between">
              <div className="flex flex-row items-center gap-4">
                <GoDotFill />
                my todos

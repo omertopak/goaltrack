@@ -46,8 +46,9 @@ const Page = () => {
         <div className="flex flex-col overflow-scroll scrollbar-hide">
           <h2 className="text-2xl font-extrabold px-7">Notes</h2>
           <ul className="space-y-2">
-            {notes.map((note) => (
-               <button
+            {notes.map((note,index) => (
+               <button 
+               key={index}
                className="italic flex items-center px-5 text-gray-400 m-2 w-40 text-left"
                 onClick={() => handleNoteSelect(note)}
               >
