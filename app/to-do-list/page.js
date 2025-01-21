@@ -84,17 +84,13 @@ const Page = () => {
           <h2 className="text-2xl font-extrabold px-7">Status</h2>
           {renderButton("inprogress", "In Progress")}
           {renderButton("completed", "Completed")}
-          {renderButton("deleted", "Deleted")}
+          {renderButton("removed", "Removed")}
 
           <h2 className="text-2xl font-extrabold px-7">Priority</h2>
           {renderButton("high", "High")}
           {renderButton("medium", "Medium")}
           {renderButton("low", "Low")}
 
-          <h2 className="text-2xl font-extrabold px-7">My Groups</h2>
-          {renderButton("group1", "map...")}
-          {renderButton("group2", "map...")}
-          {renderButton("group3", "map...")}
         </div>
       </div>
     </div>

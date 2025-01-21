@@ -13,8 +13,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="h-screen max-h-screen w-screen flex flex-row">
+        
         <Providers>
-        {/* <Sidebar/> */}
+        <Sidebar/>
         {children}
         </Providers>
       </body>
