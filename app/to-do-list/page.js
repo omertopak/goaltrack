@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaCircle } from "react-icons/fa";
 import { FaRegCircle } from "react-icons/fa6";
 import { FaListUl } from "react-icons/fa";
@@ -9,11 +9,23 @@ import { IoMdDoneAll } from "react-icons/io";
 import { GiRank1 } from "react-icons/gi";
 import { BiSolidColor } from "react-icons/bi";
 import { TbProgressCheck } from "react-icons/tb";
+//==================
+import  useTodoStore  from '../../lib/stores/todoStore';
+
 
 const Page = () => {
-  const list = [1,2,3,4]
 
+  // ============================== store
+  const { todos,getTodos, addTodo, deleteTodo, updateTodo, priorityTodo } = useTodoStore();
+
+  useEffect(() => {
+    getTodos();
+  }, [])
+  
+
+  
   // ============================== Items and selectons
+  const list = [1,2,3,4]
   const [selectedButton, setSelectedButton] = useState("inprogress"); 
   const [selectedButton2, setSelectedButton2] = useState("in Progress"); 
   const handleClick = (buttonId, label) => {
