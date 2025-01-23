@@ -1,31 +1,32 @@
 'use client';
+import  useAuthStore  from '../../lib/stores/authStore';
+import { usePathname, useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
-import { useState, useEffect } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import useAuthStore from '../../lib/stores/authStore';
+const PROTECTED_ROUTES = ['/calendar', '/chain'];
+const AUTH_ROUTES = ['/', '/register'];
 
 export function AuthProvider({ children }) {
-  const router = useRouter();
   const pathname = usePathname();
-  const { isAuthenticated, token } = useAuthStore();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const router = useRouter();
+  const { isAuthenticated, token} = useAuthStore();
 
   useEffect(() => {
-    // Sayfa yüklendiğinde authentication durumunu kontrol et
-    setIsLoaded(true);
+    const handleRouteProtection = async () => {
+     
 
-    // Public route'ları tanımla
-    const publicRoutes = ['/', '/register'];
-    console.log(isAuthenticated, token);
-    // Eğer authenticated değilse ve public route değilse login'e yönlendir
-    if (!isAuthenticated && !publicRoutes.includes(pathname)) {
-      router.push('/');
-    }
-  }, [isAuthenticated, pathname]);
+      if (!isAuthenticated && PROTECTED_ROUTES.includes(pathname)) {
+        router.push('/');
+        return;
+      }
 
+      if (isAuthenticated && AUTH_ROUTES.includes(pathname)) {
+        router.push('/calendar');
+      }
+    };
 
-  // Henüz yüklenmemişse null döndür
-  if (!isLoaded) return null;
+    handleRouteProtection();
+  }, [pathname, isAuthenticated, token]);
 
   return children;
 }
