@@ -18,6 +18,7 @@ const page = () => {
     useEffect(() => {
       login();
     }, [])
+    
   return (
     <section className="bg-slate-200 dark:bg-gray-900 w-full h-full">
   <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
