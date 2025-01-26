@@ -18,22 +18,22 @@ const Calendar = () => {
   const [newEventTitle, setNewEventTitle] = useState ("");
   const [selectedDate, setSelectedDate] = useState(null);
 
-  useEffect(() => {
-    // Load events from local storage when the component mounts
-    if (typeof window !== "undefined") {
-      const savedEvents = localStorage.getItem("events");
-      if (savedEvents) {
-        setCurrentEvents(JSON.parse(savedEvents));
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   // Load events from local storage when the component mounts
+  //   if (typeof window !== "undefined") {
+  //     const savedEvents = localStorage.getItem("events");
+  //     if (savedEvents) {
+  //       setCurrentEvents(JSON.parse(savedEvents));
+  //     }
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    // Save events to local storage whenever they change
-    if (typeof window !== "undefined") {
-      localStorage.setItem("events", JSON.stringify(currentEvents));
-    }
-  }, [currentEvents]);
+  // useEffect(() => {
+  //   // Save events to local storage whenever they change
+  //   if (typeof window !== "undefined") {
+  //     localStorage.setItem("events", JSON.stringify(currentEvents));
+  //   }
+  // }, [currentEvents]);
 
   const handleDateClick = (arg) => {
     // setSelectedDate(selected);
