@@ -7,34 +7,36 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import axios from 'axios';
 import Modal from '../(components)/Modal';
+import useCalendarStore from "../../lib/stores/calendarStore";
 
 const Calendar = () => {
   const [currentEvents, setCurrentEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newEventTitle, setNewEventTitle] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
+
+  const {isLoading,events,getEvents, createEvent} = useCalendarStore();
 
   // Etkinlikleri backend'den çek
-  const fetchEvents = async () => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get('/api/events');
-      setCurrentEvents(response.data);
-    } catch (error) {
-      console.error('Etkinlikler yüklenirken hata:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  // const fetchEvents = async () => {
+  //   try {
+  //     getEvents();
+  //     setCurrentEvents(events);
+  //   } catch (error) {
+  //     console.error('Etkinlikler yüklenirken hata:', error);
+  //   }
+  // };
 
   useEffect(() => {
-    fetchEvents();
+    getEvents();
   }, []);
 
   const handleDateClick = (arg) => {
     setSelectedDate(arg);
     setIsModalOpen(true);
+    console.log("handleClick calisti");
+    console.log("arg", arg);
   };
 
   // Yeni etkinlik ekle
@@ -42,14 +44,12 @@ const Calendar = () => {
     e.preventDefault();
     if (newEventTitle && selectedDate) {
       try {
-        setIsLoading(true);
         const newEvent = {
           title: newEventTitle,
           start: selectedDate.date,
           allDay: selectedDate.allDay
         };
-        
-        const response = await axios.post('/api/events', newEvent);
+        createEvent();
         setCurrentEvents([...currentEvents, response.data]);
         handleCloseModal();
       } catch (error) {
@@ -232,7 +232,7 @@ const Calendar = () => {
                 Seçilen Tarih
               </label>
               <div className="mt-1 text-gray-600">
-                {new Date(selectedDate.date).toLocaleDateString("tr-TR", {
+                {new Date(selectedDate.date).toLocaleDateString(undefined, {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
@@ -247,14 +247,14 @@ const Calendar = () => {
               className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
               disabled={isLoading}
             >
-              İptal
+              Cancel
             </button>
             <button
               type="submit"
               className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               disabled={isLoading}
             >
-              {isLoading ? 'Ekleniyor...' : 'Ekle'}
+              {isLoading ? 'Ekleniyor...' : 'Submit'}
             </button>
           </div>
         </form>
