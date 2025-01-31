@@ -7,16 +7,19 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import axios from 'axios';
 import Modal from '../(components)/Modal';
+import DeleteModal from '../(components)/DeleteModal';
 import useCalendarStore from "../../lib/stores/calendarStore";
 
 const Calendar = () => {
   const [currentEvents, setCurrentEvents] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDelModalOpen, setIsDelModalOpen] = useState(false);
+  const [DeleteId, setDeleteId] = useState("");
   const [newEventTitle, setNewEventTitle] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   // const [isLoading, setIsLoading] = useState(false);
 
-  const {isLoading,events,getEvents, createEvent} = useCalendarStore();
+  const {isLoading,events,getEvents, createEvent,updateEvent,deleteEvent} = useCalendarStore();
 
   // Etkinlikleri backend'den çek
   // const fetchEvents = async () => {
@@ -30,7 +33,13 @@ const Calendar = () => {
 
   useEffect(() => {
     getEvents();
+    setCurrentEvents(events);
   }, []);
+
+  //todo //?????????
+  // useEffect(() => {
+  //   setCurrentEvents();
+  // }, []);
 
   const handleDateClick = (arg) => {
     setSelectedDate(arg);
@@ -42,6 +51,8 @@ const Calendar = () => {
   // Yeni etkinlik ekle
   const handleSubmitEvent = async (e) => {
     e.preventDefault();
+    console.log("Seçilen Etkinlik ID:", newEventTitle);
+  console.log("Etkinlik Başlığı:",selectedDate);
     if (newEventTitle && selectedDate) {
       try {
         const newEvent = {
@@ -49,98 +60,79 @@ const Calendar = () => {
           start: selectedDate.date,
           allDay: selectedDate.allDay
         };
-        createEvent();
-        setCurrentEvents([...currentEvents, response.data]);
+        createEvent(newEvent);
+        setCurrentEvents(events);
         handleCloseModal();
       } catch (error) {
         console.error('Etkinlik eklenirken hata:', error);
         alert('Etkinlik eklenirken bir hata oluştu');
-      } finally {
-        setIsLoading(false);
       }
     }
   };
 
+
   // Etkinlik sil
-  const handleEventClick = async (clickInfo) => {
-    if (window.confirm(`"${clickInfo.event.title}" etkinliğini silmek istediğinize emin misiniz?`)) {
-      try {
-        setIsLoading(true);
-        await axios.delete(`/api/events/${clickInfo.event.id}`);
-        setCurrentEvents(currentEvents.filter(event => event.id !== clickInfo.event.id));
-      } catch (error) {
-        console.error('Etkinlik silinirken hata:', error);
-        alert('Etkinlik silinirken bir hata oluştu');
-      } finally {
-        setIsLoading(false);
-      }
+  const handleDeleteClick = async (e) => {
+     e.preventDefault();
+     try {
+      setDeleteId(DeleteId);
+      setCurrentEvents(events);
+      handleDelCloseModal();
+    } catch (error) {
+      console.error('Etkinlik silinirken hata:', error);
+      alert('Etkinlik silinirken bir hata oluştu');
     }
+    deleteEvent(id)
+  }
+  //etkinlik yakala
+  const handleEventClick = (info) => {
+       setDeleteId(info.event.id);
+        setIsDelModalOpen(true);
   };
 
   // Etkinlik taşıma
+  // dropInfo yada herhangi bi isim ver ama icinde event altinda id,start ve end otomatik gelir
   const handleEventDrop = async (dropInfo) => {
     try {
-      setIsLoading(true);
       const updatedEvent = {
-        id: dropInfo.event.id,
         start: dropInfo.event.start,
         end: dropInfo.event.end
       };
 
-      await axios.put(`/api/events/${dropInfo.event.id}`, updatedEvent);
-      
-      setCurrentEvents(currentEvents.map(event => {
-        if (event.id === dropInfo.event.id) {
-          return {
-            ...event,
-            start: dropInfo.event.start,
-            end: dropInfo.event.end
-          };
-        }
-        return event;
-      }));
+      updateEvent(updatedEvent,dropInfo.event.id);
+      setCurrentEvents(events);
     } catch (error) {
       console.error('Etkinlik güncellenirken hata:', error);
       alert('Etkinlik güncellenirken bir hata oluştu');
       dropInfo.revert();
-    } finally {
-      setIsLoading(false);
-    }
+    } 
   };
 
   // Etkinlik süresini değiştir
   const handleEventResize = async (resizeInfo) => {
     try {
-      setIsLoading(true);
       const updatedEvent = {
-        id: resizeInfo.event.id,
         start: resizeInfo.event.start,
         end: resizeInfo.event.end
       };
 
-      await axios.put(`/api/events/${resizeInfo.event.id}`, updatedEvent);
-      
-      setCurrentEvents(currentEvents.map(event => {
-        if (event.id === resizeInfo.event.id) {
-          return {
-            ...event,
-            start: resizeInfo.event.start,
-            end: resizeInfo.event.end
-          };
-        }
-        return event;
-      }));
+      updateEvent(updatedEvent,resizeInfo.event.id);
+      setCurrentEvents(events);
     } catch (error) {
       console.error('Etkinlik güncellenirken hata:', error);
       alert('Etkinlik güncellenirken bir hata oluştu');
       resizeInfo.revert();
-    } finally {
-      setIsLoading(false);
-    }
+    } 
   };
+ 
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+    setNewEventTitle("");
+    setSelectedDate(null);
+  };
+  const handleDelCloseModal = () => {
+    setIsDelModalOpen(false);
     setNewEventTitle("");
     setSelectedDate(null);
   };
@@ -180,13 +172,13 @@ const Calendar = () => {
             Takvim Etkinlikleri
           </div>
           <ul className="space-y-4">
-            {currentEvents.length <= 0 && (
+            {currentEvents?.length <= 0 && (
               <div className="italic px-7 dark:text-gray-400 text-gray-700">
                 Etkinlik Bulunmuyor
               </div>
             )}
 
-            {currentEvents.map((event) => (
+            {currentEvents?.map((event) => (
               <li
                 className="border border-gray-200 shadow px-4 py-2 rounded-md text-blue-800"
                 key={event.id}
@@ -259,6 +251,48 @@ const Calendar = () => {
           </div>
         </form>
       </Modal>
+      <DeleteModal isOpen={isDelModalOpen} onClose={handleDelCloseModal}>
+        <div className="text-lg font-bold mb-4">Etkinlik silinsin mi?</div>
+        <form onSubmit={handleDeleteClick} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+            Secilen tarihteki etkinlik silinsin mi?
+            </label>
+            
+          </div>
+          {selectedDate && (
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Seçilen Tarih
+              </label>
+              <div className="mt-1 text-gray-600">
+                {new Date(selectedDate.date).toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </div>
+            </div>
+          )}
+          <div className="flex justify-end space-x-2 mt-4">
+            <button
+              type="button"
+              onClick={handleDelCloseModal}
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              disabled={isLoading}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Siliniyor...' : 'Submit'}
+            </button>
+          </div>
+        </form>
+      </DeleteModal>
     </>
   );
 };
