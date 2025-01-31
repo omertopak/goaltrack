@@ -21,25 +21,18 @@ const Calendar = () => {
 
   const {isLoading,events,getEvents, createEvent,updateEvent,deleteEvent} = useCalendarStore();
 
-  // Etkinlikleri backend'den çek
-  // const fetchEvents = async () => {
-  //   try {
-  //     getEvents();
-  //     setCurrentEvents(events);
-  //   } catch (error) {
-  //     console.error('Etkinlikler yüklenirken hata:', error);
-  //   }
-  // };
+
+
 
   useEffect(() => {
     getEvents();
+  }, []);  
+  
+  useEffect(() => {
     setCurrentEvents(events);
-  }, []);
+    console.log("events", events);  
+  }, [events]); 
 
-  //todo //?????????
-  // useEffect(() => {
-  //   setCurrentEvents();
-  // }, []);
 
   const handleDateClick = (arg) => {
     setSelectedDate(arg);
