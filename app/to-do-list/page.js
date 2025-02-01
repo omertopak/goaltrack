@@ -11,6 +11,7 @@ import { BiSolidColor } from "react-icons/bi";
 import { TbProgressCheck } from "react-icons/tb";
 //==================
 import  useTodoStore  from '../../lib/stores/todoStore';
+import AddTodoModal from "../(components)/AddTodoModal";
 
 
 const Page = () => {
@@ -22,10 +23,10 @@ const Page = () => {
     getTodos();
   }, [])
   
-
+//TODO modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   // ============================== Items and selectons
-  const list = [1,2,3,4]
   const [selectedButton, setSelectedButton] = useState("inprogress"); 
   const [selectedButton2, setSelectedButton2] = useState("in Progress"); 
   const handleClick = (buttonId, label) => {
@@ -47,47 +48,67 @@ const Page = () => {
     </button>
   );
   // ============================== HandleClick
+  const handleComplete = (id) => {
+    
+  };
+  const handleRank = (id) => {
+    
+  };
   const handleDelete = (id) => {
 
   };
-
 
   return (
     <div className="flex w-full m-10">
       <div className="w-3/4 h-full">
         <div className="w-full flex flex-col gap-3">
           <h2 className="text-3xl font-extrabold ">To Do List</h2>
-          <div className="flex items-center gap-3  ml-3">
-            <FaListUl />
+          <div className="flex items-center gap-3  ml-3 justify-between">
+            <div className="flex items-center gap-3  ml-3">
+               <FaListUl />
             <h4 className="text-xl font-extrabold">{selectedButton2}</h4>
+            </div>
+            <button
+              className="px-2 py-2 mr-5 bg-slate-400 text-white rounded-md"
+              onClick={() => setIsModalOpen(true)}
+            >
+              + Add Todo
+            </button>
+            <AddTodoModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+         
+        />
           </div>
           <ul className="flex flex-col gap-2 ml-5 mr-10">
-          {list.map((item,index)=>(
-             <li key={index} className="flex flex-row items-center justify-between">
-             <div className="flex flex-row items-center gap-4">
-               <GoDotFill />
-               my todos
-             </div>
-             <div className="flex items-center gap-8">
-               <button onClick={() => handleComplete(todo.id)}>
-                 <IoMdDoneAll className="text-xl"/>
-               </button>
-               <button onClick={() => handleRank(todo.id)}>
-                 <GiRank1 className="text-xl"/>
-               </button>
-               <button onClick={() => handleProgress(todo.id)}>
+            {todos?.map((todo, index) => (
+              <li
+                key={index}
+                className="flex flex-row items-center justify-between"
+              >
+                <div className="flex flex-row items-center gap-4">
+                  <GoDotFill />
+                  {todo.todo}
+                </div>
+                <div className="flex items-center gap-8">
+                  <button onClick={() => handleComplete(todo._id)}>
+                    <IoMdDoneAll className="text-xl" />
+                  </button>
+                  <button onClick={() => handleRank(todo._id)}>
+                    <GiRank1 className="text-xl" />
+                  </button>
+                  {/* <button onClick={() => handleProgress(todo._id)}>
                  <TbProgressCheck className="text-xl"/>
                </button>
-               <button onClick={() => handleGroups(todo.id)}>
+               <button onClick={() => handleGroups(todo._id)}>
                  <BiSolidColor className="text-xl"/>
-               </button>
-               <button onClick={() => handleDelete(todo.id)}>
-                 <MdDelete className="text-xl"/>
-               </button>
-             </div>
-           </li>
-          ))}
-           
+               </button> */}
+                  <button onClick={() => handleDelete(todo._id)}>
+                    <MdDelete className="text-xl" />
+                  </button>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
@@ -102,10 +123,10 @@ const Page = () => {
           {renderButton("high", "High")}
           {renderButton("medium", "Medium")}
           {renderButton("low", "Low")}
-
         </div>
       </div>
     </div>
+    
   );
 };
 
