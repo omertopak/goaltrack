@@ -30,7 +30,7 @@ const Calendar = () => {
   
   useEffect(() => {
     setCurrentEvents(events);
-    console.log("events", events);  
+    // console.log("events", events);  
   }, [events]); 
 
 
@@ -51,6 +51,7 @@ const Calendar = () => {
         const newEvent = {
           title: newEventTitle,
           start: selectedDate.date,
+          end: selectedDate.date,
           allDay: selectedDate.allDay
         };
         createEvent(newEvent);
@@ -67,20 +68,21 @@ const Calendar = () => {
   // Etkinlik sil
   const handleDeleteClick = async (e) => {
      e.preventDefault();
+    //  console.log(DeleteId);
      try {
-      setDeleteId(DeleteId);
+      // setDeleteId(DeleteId);
+      deleteEvent(DeleteId)
       setCurrentEvents(events);
       handleDelCloseModal();
     } catch (error) {
       console.error('Etkinlik silinirken hata:', error);
       alert('Etkinlik silinirken bir hata oluştu');
     }
-    deleteEvent(id)
   }
-  //etkinlik yakala
+  //etkinlik silme icin id yakala
   const handleEventClick = (info) => {
-       setDeleteId(info.event.id);
-        setIsDelModalOpen(true);
+      setDeleteId(info.event._def.extendedProps._id);
+      setIsDelModalOpen(true);
   };
 
   // Etkinlik taşıma
@@ -91,8 +93,8 @@ const Calendar = () => {
         start: dropInfo.event.start,
         end: dropInfo.event.end
       };
-
-      updateEvent(updatedEvent,dropInfo.event.id);
+      const dropId = dropInfo.event._def.extendedProps._id;
+      updateEvent(updatedEvent,dropId);
       setCurrentEvents(events);
     } catch (error) {
       console.error('Etkinlik güncellenirken hata:', error);
@@ -108,14 +110,15 @@ const Calendar = () => {
         start: resizeInfo.event.start,
         end: resizeInfo.event.end
       };
-
-      updateEvent(updatedEvent,resizeInfo.event.id);
+      const resizeId = resizeInfo.event._def.extendedProps._id;
+      console.log("Güncellenmiş Etkinlik:", updatedEvent);
+      await updateEvent(updatedEvent, resizeId);
       setCurrentEvents(events);
     } catch (error) {
       console.error('Etkinlik güncellenirken hata:', error);
       alert('Etkinlik güncellenirken bir hata oluştu');
       resizeInfo.revert();
-    } 
+    }
   };
  
 
