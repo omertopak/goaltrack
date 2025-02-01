@@ -17,7 +17,7 @@ import AddTodoModal from "../(components)/AddTodoModal";
 const Page = () => {
 
   // ============================== store
-  const { todos,getTodos, addTodo, deleteTodo, updateTodo, priorityTodo } = useTodoStore();
+  const { todos,getTodos, deleteTodo, updateTodo, priorityTodo } = useTodoStore();
 
   useEffect(() => {
     getTodos();
@@ -49,13 +49,13 @@ const Page = () => {
   );
   // ============================== HandleClick
   const handleComplete = (id) => {
-    
+    updateTodo(id)
   };
-  const handleRank = (id) => {
-    
+  const handlePriority = (id) => {
+    priorityTodo(id)
   };
   const handleDelete = (id) => {
-
+    deleteTodo(id)
   };
 
   return (
@@ -65,8 +65,8 @@ const Page = () => {
           <h2 className="text-3xl font-extrabold ">To Do List</h2>
           <div className="flex items-center gap-3  ml-3 justify-between">
             <div className="flex items-center gap-3  ml-3">
-               <FaListUl />
-            <h4 className="text-xl font-extrabold">{selectedButton2}</h4>
+              <FaListUl />
+              <h4 className="text-xl font-extrabold">{selectedButton2}</h4>
             </div>
             <button
               className="px-2 py-2 mr-5 bg-slate-400 text-white rounded-md"
@@ -74,11 +74,10 @@ const Page = () => {
             >
               + Add Todo
             </button>
-            <AddTodoModal 
-          isOpen={isModalOpen} 
-          onClose={() => setIsModalOpen(false)} 
-         
-        />
+            <AddTodoModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+            />
           </div>
           <ul className="flex flex-col gap-2 ml-5 mr-10">
             {todos?.map((todo, index) => (
@@ -92,10 +91,22 @@ const Page = () => {
                 </div>
                 <div className="flex items-center gap-8">
                   <button onClick={() => handleComplete(todo._id)}>
-                    <IoMdDoneAll className="text-xl" />
+                    {todo.completed === true ? (
+                      <IoMdDoneAll className="text-xl text-green-500" />
+                    ) : (
+                      <IoMdDoneAll className="text-xl" />
+                    )}
+                    {/* <IoMdDoneAll className="text-xl" /> */}
                   </button>
-                  <button onClick={() => handleRank(todo._id)}>
-                    <GiRank1 className="text-xl" />
+                  <button onClick={() => handlePriority(todo._id)}>
+                    {todo.priority === "High" ? (
+                      <GiRank1 className="text-xl text-red-700" />
+                    ) : todo.priority === "Medium" ? (
+                      <GiRank1 className="text-xl text-orange-600" /> 
+                    ) : (
+                      <GiRank1 className="text-xl text-green-700" /> 
+                    )}
+                    {/* <GiRank1 className="text-xl" /> */}
                   </button>
                   {/* <button onClick={() => handleProgress(todo._id)}>
                  <TbProgressCheck className="text-xl"/>
@@ -126,7 +137,6 @@ const Page = () => {
         </div>
       </div>
     </div>
-    
   );
 };
 
