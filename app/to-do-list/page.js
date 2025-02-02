@@ -7,8 +7,6 @@ import { GoDotFill } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
 import { IoMdDoneAll } from "react-icons/io";
 import { GiRank1 } from "react-icons/gi";
-import { BiSolidColor } from "react-icons/bi";
-import { TbProgressCheck } from "react-icons/tb";
 //==================
 import  useTodoStore  from '../../lib/stores/todoStore';
 import AddTodoModal from "../(components)/AddTodoModal";
@@ -27,7 +25,7 @@ const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   
   // ============================== Items and selectons
-  const [selectedButton, setSelectedButton] = useState("inprogress"); 
+  const [selectedButton, setSelectedButton] = useState("all"); 
   const [selectedButton2, setSelectedButton2] = useState("in Progress"); 
   const handleClick = (buttonId, label) => {
     setSelectedButton(buttonId); 
@@ -40,7 +38,7 @@ const Page = () => {
       className="italic flex items-center px-5 text-gray-400 m-2 w-40 text-left"
     >
       {selectedButton === id ? (
-        <FaCircle className="mr-2 text-Gray-400" />
+        <FaCircle className="mr-2 text-gray-400" />
       ) : (
         <FaRegCircle className="mr-2 text-gray-400" />
       )}
@@ -58,6 +56,23 @@ const Page = () => {
     deleteTodo(id)
   };
 
+  //Data to screen
+  let renderData = todos;
+  if(selectedButton==="all"){
+    renderData = todos;
+  }else if(selectedButton==="completed"){
+    renderData = todos.filter((todo) => todo.completed === true);
+  }else if (selectedButton==="incomplete"){
+    renderData = todos.filter((todo) => todo.completed === false);
+  }else if(selectedButton==="high"){
+    renderData = todos.filter((todo) => todo.priority === "High");
+  }else if(selectedButton==="medium"){
+    renderData = todos.filter((todo) => todo.priority === "Medium");
+  }else if(selectedButton==="low"){
+    renderData = todos.filter((todo) => todo.priority === "Low");
+  }
+
+
   return (
     <div className="flex w-full m-10">
       <div className="w-3/4 h-full">
@@ -69,7 +84,7 @@ const Page = () => {
               <h4 className="text-xl font-extrabold">{selectedButton2}</h4>
             </div>
             <button
-              className="px-2 py-2 mr-5 bg-slate-400 text-white rounded-md"
+              className="bg-slate-400 hover:bg-slate-600 text-black dark:text-white font-bold py-2 px-4 border-b-4 border-slate-500 hover:border-slate-700 rounded items-center mr-7"
               onClick={() => setIsModalOpen(true)}
             >
               + Add Todo
@@ -80,7 +95,7 @@ const Page = () => {
             />
           </div>
           <ul className="flex flex-col gap-2 ml-5 mr-10">
-            {todos?.map((todo, index) => (
+            {renderData?.map((todo, index) => (
               <li
                 key={index}
                 className="flex flex-row items-center justify-between"
@@ -96,7 +111,6 @@ const Page = () => {
                     ) : (
                       <IoMdDoneAll className="text-xl" />
                     )}
-                    {/* <IoMdDoneAll className="text-xl" /> */}
                   </button>
                   <button onClick={() => handlePriority(todo._id)}>
                     {todo.priority === "High" ? (
@@ -126,9 +140,9 @@ const Page = () => {
       <div className="w-1/4 h-full overflow-scroll scrollbar-hide">
         <div className="flex flex-col text-start">
           <h2 className="text-2xl font-extrabold px-7">Status</h2>
-          {renderButton("inprogress", "In Progress")}
+          {renderButton("all", "All")}
           {renderButton("completed", "Completed")}
-          {renderButton("removed", "Removed")}
+          {renderButton("incomplete", "Incomplete")}
 
           <h2 className="text-2xl font-extrabold px-7">Priority</h2>
           {renderButton("high", "High")}
