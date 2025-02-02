@@ -89,13 +89,13 @@ const Page = () => {
             <button
               type="button"
               onClick={handleStartStop}
-              className="bg-slate-400 hover:bg-slate-600 text-white font-bold py-2 px-4 border-b-4 border-slate-500 hover:border-slate-700 rounded"
+              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded"
             >
               {isTimerRunning ? "Pause" : "Start"}
             </button>
             <button
               type="submit"
-              className="bg-slate-400 hover:bg-slate-600 text-white font-bold py-2 px-4 border-b-4 border-slate-500 hover:border-slate-700 rounded"
+              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded"
             >
               Set
             </button>

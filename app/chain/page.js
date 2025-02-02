@@ -12,28 +12,33 @@ const Page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // ============================== Items and selectons
-  const [selectedButton, setSelectedButton] = useState("inprogress");
-  const [selectedButton2, setSelectedButton2] = useState("in Progress");
-  const handleClick = (buttonId, label) => {
-    setSelectedButton(buttonId);
-    setSelectedButton2(label);
-  };
+  const [title, setTitle] = useState("Success is built on persistence—stay determined, and progress will follow!");
+  
 
-  useEffect(() => {
-    getChain();
-  }, []);
+  // useEffect(() => {
+  //   const fetchChains = async () => {
+  //     await getChain();
+  //     if (chains.length > 0) {
+  //       setTitle(chains[0].chainName);
+  //     }
+  //   };
+  //   fetchChains();
+  // }, [getChain, chains]);
 
   const handleDelete = (id) =>{
     deleteChain(id)
   }
 
+  const handleChain = (chainName) => {
+    setTitle(chainName)
+  }
   return (
     <div className="flex w-full m-10">
       <div className="w-3/4 h-full">
         <div className="w-full flex flex-col gap-3 h-full">
           <h2 className="text-3xl font-extrabold ">Chain</h2>
           <div className="flex items-center gap-3  ml-3">
-            <h4 className="text-xl font-extrabold">{selectedButton2}</h4>
+            <h4 className="text-xl font-extrabold text-black dark:text-gray-400">{title}</h4>
           </div>
           {/* <ChainPage /> */}
         </div>
@@ -47,23 +52,24 @@ const Page = () => {
           <div>
             <ul className="space-y-4">
               {chains?.map((chain, index) => (
-                <>
+                <div className="mt-5" key={index}>
                   <li
-                    className="border border-gray-200 shadow px-4 py-2 rounded-md text-blue-800 flex justify-between items-center"
-                    key={index}
+                    onClick={() => handleChain(chain.chainName)}
+                    className="border border-gray-200 shadow px-4 py-2 rounded-md  flex justify-between items-center bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold  "
+                    
                   >
                     {chain.chainName} <button onClick={() => handleDelete(chain._id)}>
                     <MdDelete className="text-xl" />
                   </button>
                   </li>
                  
-                </>
+                </div>
               ))}
             </ul>
           </div>
         </div>
         <button
-          className="px-2 py-2  bg-slate-400 text-white rounded-md"
+          className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded"
           onClick={() => setIsModalOpen(true)}
         >
           + Add Chain

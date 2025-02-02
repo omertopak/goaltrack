@@ -84,7 +84,7 @@ const Page = () => {
               <h4 className="text-xl font-extrabold">{selectedButton2}</h4>
             </div>
             <button
-              className="bg-slate-400 hover:bg-slate-600 text-black dark:text-white font-bold py-2 px-4 border-b-4 border-slate-500 hover:border-slate-700 rounded items-center mr-7"
+              className="bg-slate-400  dark:bg-zinc-950  text-black dark:text-white font-bold py-2 px-4  rounded items-center mr-7"
               onClick={() => setIsModalOpen(true)}
             >
               + Add Todo

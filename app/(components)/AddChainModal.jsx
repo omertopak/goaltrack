@@ -33,12 +33,12 @@ const AddChainModal = ({ isOpen, onClose }) => {
           <div className="flex justify-between">
             <button
               type="button"
-              className="px-4 py-2 bg-red-500 text-white rounded-md"
+              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded"
               onClick={onClose}
             >
               Kapat
             </button>
-            <button type="submit" className="px-4 py-2 bg-green-600 text-white rounded-md">
+            <button type="submit" className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded">
               Kaydet
             </button>
           </div>
