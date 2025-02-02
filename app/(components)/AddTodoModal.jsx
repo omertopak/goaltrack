@@ -50,7 +50,7 @@ const AddTodoModal = ({ isOpen, onClose }) => {
             >
               Kapat
             </button>
-            <button type="submit" className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded">
+            <button type="submit" className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  dark:border dark:border-gray-50 rounded-md">
               Kaydet
             </button>
           </div>

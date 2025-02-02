@@ -20,6 +20,7 @@ const Calendar = () => {
   // const [isLoading, setIsLoading] = useState(false);
 
   const {isLoading,events,getEvents, createEvent,updateEvent,deleteEvent} = useCalendarStore();
+  const sortedEvents = events.sort((a, b) => new Date(a.start) - new Date(b.start));
 
 
 
@@ -161,28 +162,34 @@ const Calendar = () => {
             eventDrop={handleEventDrop}
             eventResize={handleEventResize}
             events={currentEvents}
+            eventClassNames={["bg-slate-400", "hover:bg-slate-600",   "text-white", "font-bold","border-none"]}
+            eventTimeFormat={{
+              hour: '2-digit',    // Saatin 2 haneli gösterimi
+              minute: '2-digit',  // Dakikanın 2 haneli gösterimi
+              meridiem: false     // "AM"/"PM" ekini kaldır
+            }}
           />
         </div>
-        <div className="w-1/4 h-full flex flex-col">
+        <div className="w-1/4 h-full flex flex-col ">
           <div className="text-2xl font-extrabold">
             Takvim Etkinlikleri
           </div>
-          <ul className="space-y-4">
+          <ul className="space-y-4 overflow-scroll scrollbar-hide mt-5">
             {currentEvents?.length <= 0 && (
               <div className="italic px-7 dark:text-gray-400 text-gray-700">
                 Etkinlik Bulunmuyor
               </div>
             )}
 
-            {currentEvents?.map((event) => (
+            {sortedEvents?.map((event) => (
               <li
-                className="border border-gray-200 shadow px-4 py-2 rounded-md text-blue-800"
+                className="border border-gray-200 shadow px-4 py-2 rounded-md  truncate min-w-0 italic  items-center  text-gray-400 my-1 w-full overflow-hidden text-left"
                 key={event._id}
               >
                 {event.title}
                 <br />
                 {event.start ? (
-                  <label className="text-slate-950">
+                  <label className="text-gray-600 flex justify-end">
                     {new Date(event.start).toLocaleDateString("tr-TR", {
                       year: "numeric",
                       month: "short",
@@ -239,7 +246,7 @@ const Calendar = () => {
             </button>
             <button
               type="submit"
-              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded"
+              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  dark:border dark:border-gray-50 rounded-md"
               disabled={isLoading}
             >
               {isLoading ? 'Ekleniyor...' : 'Submit'}
@@ -281,7 +288,7 @@ const Calendar = () => {
             </button>
             <button
               type="submit"
-              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded"
+              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  dark:border dark:border-gray-50 rounded-md"
               disabled={isLoading}
             >
               {isLoading ? 'Siliniyor...' : 'Submit'}

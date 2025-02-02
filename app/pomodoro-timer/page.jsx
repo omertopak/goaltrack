@@ -68,7 +68,7 @@ const Page = () => {
       <div className="w-1/4 h-full">
         <form onSubmit={handleSubmit} className="flex flex-col h-full justify-between">
           <div className="flex flex-col gap-5">
-            <label className="font-bold rounded border p-3 border-slate-500 flex justify-evenly overflow-hidden">
+            <label className="font-bold rounded border p-3 border-slate-500 flex justify-evenly overflow-hidden dark:text-gray-400">
               Focus (min) :
               <input
                 type="number"
@@ -76,7 +76,7 @@ const Page = () => {
                 onChange={(e) => setWorkDuration(e.target.value * 60)}
               />
             </label>
-            <label className="font-bold rounded border p-3 border-slate-500 flex justify-evenly overflow-hidden">
+            <label className="font-bold rounded border p-3 border-slate-500 flex justify-evenly overflow-hidden dark:text-gray-400">
               Break (min) :
               <input
                 type="number"
@@ -89,13 +89,13 @@ const Page = () => {
             <button
               type="button"
               onClick={handleStartStop}
-              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded"
+              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  dark:border dark:border-gray-50 rounded-md"
             >
               {isTimerRunning ? "Pause" : "Start"}
             </button>
             <button
               type="submit"
-              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded"
+              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  dark:border dark:border-gray-50 rounded-md"
             >
               Set
             </button>

@@ -8,10 +8,11 @@ import useNotesStore from "@/lib/stores/notesStore";
 const Page = () => {
   const { notes, getNotes, updateNote, createNote, deleteNote } =
     useNotesStore();
+    
   useState(() => {
     getNotes();
   }, []);
-  console.log("notes", notes);
+  // console.log("notes", notes);
   const defaultNote = { title: "", note: "" };
 
   const [selectedNote, setSelectedNote] = useState(defaultNote);
@@ -69,34 +70,36 @@ const Page = () => {
         <div className="flex flex-col overflow-scroll scrollbar-hide">
           <h2 className="text-2xl font-extrabold px-7 ">Notes</h2>
           <ul className="space-y-2 mt-5">
-             
             {notes?.map((note, index) => (
-              <div className="flex justify-between">
-              <button
-                key={index}
-                className="italic flex items-center px-5 text-gray-400 my-1 w-full text-left"
-                onClick={() => handleNoteSelect(note)}
-              >
-                <FaCircle className="mr-2 text-Gray-400" />
-                {note.title}
-              </button>
-               <button className="text-gray-400">
-               <MdDelete className="text-xl"  onClick={()=>deleteNote(note._id)}/>
-             </button>
-             </div>
+              <div className="flex justify-between" key={index}>
+                <button
+                  key={index}
+                  className="italic flex items-center px-5 text-gray-400 my-1 w-full overflow-hidden text-left"
+                  onClick={() => handleNoteSelect(note)}
+                >
+                  <FaCircle className="mr-2 text-gray-400 flex-shrink-0" />
+                  <span className="truncate min-w-0">{note.title}</span>
+                </button>
+                <button className="text-gray-400">
+                  <MdDelete
+                    className="text-xl"
+                    onClick={() => deleteNote(note._id)}
+                  />
+                </button>
+              </div>
             ))}
           </ul>
         </div>
         <div className="flex flex-col gap-3">
-        <button
-            className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 text-white font-bold py-2 px-4 dark:bg-zinc-950  rounded w-full items-center flex justify-center"
-            onClick={() => handleTemplate()}
-            >
-              <FaCirclePlus className="mr-2 text-Gray-400 dark:text-gray-400" />
-              Create New Note
-            </button> 
           <button
-            className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  rounded w-full"
+            className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 text-white font-bold py-2 px-4 dark:bg-zinc-950   w-full items-center flex justify-center dark:border dark:border-gray-50 rounded-md"
+            onClick={() => handleTemplate()}
+          >
+            <FaCirclePlus className="mr-2 text-Gray-400 dark:text-gray-400" />
+            Create New Note
+          </button>
+          <button
+            className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4   w-full dark:border dark:border-gray-50 rounded-md"
             onClick={handleSave}
           >
             Save Changes
