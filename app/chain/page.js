@@ -53,7 +53,7 @@ const Page = () => {
             <h2 className="text-2xl font-extrabold px-7">Chains</h2>
             <GiBreakingChain className="text-3xl" />
           </div>
-          <div>
+          <div className="overflow-scroll scrollbar-hide">
             <ul className="space-y-4">
               {chains?.map((chain, index) => (
                 <div className="mt-5" key={index}>

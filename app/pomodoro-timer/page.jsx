@@ -68,20 +68,22 @@ const Page = () => {
       <div className="w-1/4 h-full">
         <form onSubmit={handleSubmit} className="flex flex-col h-full justify-between">
           <div className="flex flex-col gap-5">
-            <label className="font-bold rounded border p-3 border-slate-500 flex justify-evenly overflow-hidden dark:text-gray-400">
+            <label className="font-bold rounded border p-3 border-slate-500 flex justify-evenly overflow-hidden dark:text-gray-400 gap-3 flex-col">
               Focus (min) :
               <input
                 type="number"
                 value={workDuration / 60}
                 onChange={(e) => setWorkDuration(e.target.value * 60)}
+                className="border rounded-md border-slate-500"
               />
             </label>
-            <label className="font-bold rounded border p-3 border-slate-500 flex justify-evenly overflow-hidden dark:text-gray-400">
+            <label className="font-bold rounded border p-3 border-slate-500 flex flex-col justify-evenly overflow-hidden dark:text-gray-400 gap-3">
               Break (min) :
               <input
                 type="number"
                 value={breakDuration / 60}
                 onChange={(e) => setBreakDuration(e.target.value * 60)}
+                className="border rounded-md border-slate-500"
               />
             </label>
           </div>
