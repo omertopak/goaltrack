@@ -2,6 +2,7 @@
 import React from 'react'
 import { useState,useEffect } from 'react';
 import useAuthStore from '../lib/stores/authStore';
+import Link from 'next/link';
 
 
 
@@ -30,27 +31,21 @@ const page = () => {
               <form className="space-y-4 md:space-y-6" action="#">
                   <div>
                       <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">Your email</label>
-                      <input type="email" name="email" id="email" className="bg-slate-200 border border-gray-300 text-gray-700 rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-black dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@gmail.com" required=""/>
+                      <input type="email" name="email" id="email" className="bg-slate-200 border border-gray-300 text-gray-700 rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@gmail.com" required=""/>
                   </div>
                   <div>
                       <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-700 dark:text-gray-400">Password</label>
-                      <input type="password" name="password" id="password" placeholder="••••••••" className="bg-slate-200 border border-gray-300 text-gray-700 rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-black dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
+                      <input type="password" name="password" id="password" placeholder="••••••••" className="bg-slate-200 border border-gray-300 text-gray-700 rounded-lg focus:ring-slate-600 focus:border-slate-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required=""/>
                   </div>
                   <div className="flex items-center justify-between">
-                      <div className="flex items-start">
-                          <div className="flex items-center h-5">
-                            <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-slate-200 focus:ring-3 focus:ring-slate-300 dark:bg-black dark:border-gray-600 dark:focus:ring-slate-600 dark:ring-offset-gray-800" required=""/>
-                          </div>
-                          <div className="ml-3 text-sm">
-                            <label htmlFor="remember" className="text-gray-700 dark:text-gray-300">Remember me</label>
-                          </div>
-                      </div>
-                      <a href="#" className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot password?</a>
                   </div>
-                  <button type="submit" onSubmit={()=>handleLogin()} className="w-full text-gray-700 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
-                  <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                      Don’t have an account yet? <a href="#" className="font-medium text-gray-700 hover:underline dark:text-primary-500">Sign up</a>
-                  </p>
+                  <div className='flex flex-col gap-5 justify-self-center w-full'>
+                  <button type="submit" onSubmit={()=>handleLogin()} className="w-full text-white bg-slate-700 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-slate-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-slate-600 dark:hover:bg-slate-700 dark:focus:ring-slate-800"
+             >Sign in</button>
+                 
+                 <Link href="/register" className="w-fit text-gray-500 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 m-auto ">Sign up</Link>
+                  </div>
+                 
               </form>
           </div>
       </div>

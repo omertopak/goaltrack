@@ -1,9 +1,10 @@
 "use client"
+import Link from 'next/link'
 import React from 'react'
 
 const SignUp = () => {
   return (
-    <section className="bg-slate-200 dark:bg-black w-full h-full">
+    <section className=" w-full h-full bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-slate-300 rounded-lg shadow dark:border sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -69,12 +70,9 @@ const SignUp = () => {
               >
                 Sign Up
               </button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Already have an account?{' '}
-                <a href="#" className="font-medium text-slate-600 hover:underline dark:text-slate-500">
-                  Sign In
-                </a>
-              </p>
+              <div className='flex flex-col gap-5 justify-self-center'>
+                <Link href="/" className="w-fit text-gray-500 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 ">Sign In</Link>
+              </div>
             </form>
           </div>
         </div>
