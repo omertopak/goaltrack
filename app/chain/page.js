@@ -15,15 +15,7 @@ const Page = () => {
   const [title, setTitle] = useState("Success is built on persistence—stay determined, and progress will follow!");
   
 
-  // useEffect(() => {
-  //   const fetchChains = async () => {
-  //     await getChain();
-  //     if (chains.length > 0) {
-  //       setTitle(chains[0].chainName);
-  //     }
-  //   };
-  //   fetchChains();
-  // }, [getChain, chains]);
+ 
   useEffect(() => {
     getChain()
   }, [])
@@ -42,7 +34,7 @@ const Page = () => {
         <div className="w-full flex flex-col gap-3 h-full">
           <h2 className="text-3xl font-extrabold ">Chain</h2>
           <div className="flex items-center gap-3  ml-3">
-            <h4 className="text-xl font-extrabold text-black dark:text-gray-400">{title}</h4>
+            <h4 className="text-xl font-extrabold text-gray-600 dark:text-gray-400">{title}</h4>
           </div>
           {/* <ChainPage /> */}
         </div>

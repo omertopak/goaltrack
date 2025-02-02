@@ -100,9 +100,10 @@ const Page = () => {
                 key={index}
                 className="flex flex-row items-center justify-between"
               >
-                <div className="flex flex-row items-center gap-4">
+                <div className="flex flex-row items-center gap-4 overflow-hidden  mr-2">
                   <GoDotFill />
-                  {todo.todo}
+                  <span className="truncate">{todo.todo}</span>
+                  
                 </div>
                 <div className="flex items-center gap-8">
                   <button onClick={() => handleComplete(todo._id)}>
