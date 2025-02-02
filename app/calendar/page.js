@@ -177,7 +177,7 @@ const Calendar = () => {
             {currentEvents?.map((event) => (
               <li
                 className="border border-gray-200 shadow px-4 py-2 rounded-md text-blue-800"
-                key={event.id}
+                key={event._id}
               >
                 {event.title}
                 <br />
