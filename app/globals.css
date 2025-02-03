@@ -22,4 +22,7 @@
     --gradient-color: rgb(107 114 128); /* Dark tema için */
     --number-color:rgb(107 114 128);
   }
+  .fc-day-today {
+    background-color: rgb(51 65 85) !important; /* Sarı */
+  }
   

@@ -20,7 +20,7 @@ const Calendar = () => {
   // const [isLoading, setIsLoading] = useState(false);
 
   const {isLoading,events,getEvents, createEvent,updateEvent,deleteEvent} = useCalendarStore();
-  const sortedEvents = events.sort((a, b) => new Date(a.start) - new Date(b.start));
+  const sortedEvents = events?.sort((a, b) => new Date(a.start) - new Date(b.start));
 
 
 

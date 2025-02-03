@@ -176,6 +176,7 @@ const Calendar = () => {
             eventDrop={handleEventDrop}
             eventResize={handleEventResize}
             events={currentEvents}
+            
           />
         </div>
         <div className="w-1/4 h-full flex flex-col">
