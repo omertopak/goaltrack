@@ -7,7 +7,7 @@ import AddChainModal from "../(components)/AddChainModal";
 import { MdDelete } from "react-icons/md";
 
 const Page = () => {
-  const { chains, getChain, deleteChain,updateChain } = useChainStore();
+  const { chains, getChain, deleteChain,updateChain,message } = useChainStore();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // ============================== Items and selectons
@@ -15,7 +15,7 @@ const Page = () => {
     "Success is built on persistence—stay determined, and progress will follow!"
   );
   const [number, setNumber] = useState("?");
-
+  const [chainId, setChainId] = useState("")
   useEffect(() => {
     getChain();
   }, []);
@@ -26,10 +26,22 @@ const Page = () => {
   const handleUpdate = (id) => {
     updateChain(id);
   };
+  useEffect(() => {
+    if (chainId) {
+      const updatedChain = chains.find(chain => chain._id === chainId);
+      if (updatedChain) {
+        setNumber(updatedChain.dayNumber);
+      }
+    }
+  }, [chains]); // chains değiştiğinde çalışacak
+  
+  
+  
 
   const handleChain = (chain) => {
     setTitle(chain.chainName);
     setNumber(chain.dayNumber);
+    setChainId(chain._id)
   };
   
   return (
@@ -43,20 +55,19 @@ const Page = () => {
             </h4>
           </div>
           <div 
-          onClick={handleUpdate}
-          className="relative w-full h-full mx-auto overflow-hidden scrollbar-hide group hover:cursor-pointer">
+          className="relative w-full h-full mx-auto overflow-hidden scrollbar-hide group">
             <h2 className="h-full flex items-center justify-center text-9xl font-bold animate-bounce dark:text-slate-100 text-slate-800">
               {number}
             </h2>
 
-            {/* Hover edildiğinde görünen "Merhaba" */}
+            {/* Hover edildiğinde görünen "Merhaba"
             {number === "?" ? (
               <></>
             ) : (
               <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xl px-4 py-2 rounded transition-opacity">
-                Click to complete day {number}!
+                {message}
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
@@ -75,7 +86,7 @@ const Page = () => {
                     className="border border-gray-200 shadow px-4 py-2 rounded-md  flex justify-between items-center bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold  "
                   >
                     {chain.chainName}{" "}
-                    <button onClick={() => handleDelete(chain._id)}>
+                    <button onClick={() =>handleDelete(chain._id)}>
                       <MdDelete className="text-xl" />
                     </button>
                   </li>
@@ -84,12 +95,21 @@ const Page = () => {
             </ul>
           </div>
         </div>
+        <div className="flex flex-col gap-3">
+           <button
+          className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  dark:border dark:border-gray-50 rounded-md"
+          onClick={() => handleUpdate(chainId)}
+        >
+          Done!
+        </button>
         <button
           className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  dark:border dark:border-gray-50 rounded-md"
           onClick={() => setIsModalOpen(true)}
         >
           + Add Chain
         </button>
+        </div>
+       
         <AddChainModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
