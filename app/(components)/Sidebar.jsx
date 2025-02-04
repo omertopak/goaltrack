@@ -16,8 +16,6 @@ const Sidebar = () => {
         "Notes & Ideas": ["All notes", "Urgent", "Removed"],
         "Chain": ["Chain1", "Chain2"],
         "Pomodoro Timer": [],
-
-        // "Profile":["aska", "reposrt"],
     }
     const generateHref = (key) => {
         return key.toLowerCase().replace(/\s+/g, "-");

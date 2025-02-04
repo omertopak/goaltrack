@@ -1,16 +1,16 @@
-// app/layout.js (Client Component)
-"use client"; // Bu bileşeni Client Component yapıyor
+"use client";
 
 import "./globals.css";
 import Sidebar from "./(components)/Sidebar";
 import { Providers } from "./providers";
-import { usePathname } from 'next/navigation'; // usePathname kullanımı
+import { usePathname } from 'next/navigation';
 import { AuthProvider } from "./(components)/AuthProvider";
 
 export default function RootLayout({ children }) {
+  
   const pathname = usePathname();
 
-  const noSidebarPages = ['/', '/register']; // Sidebar'ı gizlemek istediğiniz sayfalar
+  const noSidebarPages = ['/', '/register']; 
   const showSidebar = !noSidebarPages.includes(pathname);
 
   return (
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
           {children}
         </Providers>
         </AuthProvider>
-        
+      
       </body>
     </html>
   );

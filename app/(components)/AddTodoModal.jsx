@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useTodoStore from "@/lib/stores/todoStore";
 const AddTodoModal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null; // Modal kapalıysa hiçbir şey gösterme
+  if (!isOpen) return null; 
     const {createTodo} = useTodoStore();
     const [todo, setTodo] = useState("");
     const [priority, setPriority] = useState("Low");
@@ -15,11 +15,10 @@ const AddTodoModal = ({ isOpen, onClose }) => {
   return (
      <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-lg font-bold mb-4 text-gray-700 dark:text-slate-700">Add new todo</h2>
+        <h2 className="text-lg font-bold mb-4 text-gray-700 dark:text-slate-700">Add a new todo</h2>
 
-        {/* Form */}
+        
         <form onSubmit={handleSubmit}>
-          {/* Input */}
           <input
             type="text"
             placeholder=""
@@ -29,7 +28,6 @@ const AddTodoModal = ({ isOpen, onClose }) => {
             required
           />
 
-          {/* Select (Key-Value Mantığı) */}
           <select
             className="w-full p-2 border border-gray-300 rounded-md mb-4 dark:bg-slate-200 dark:text-slate-600 bg-gray-100"
             value={priority}
@@ -41,7 +39,6 @@ const AddTodoModal = ({ isOpen, onClose }) => {
             <option value="High">High</option>
           </select>
 
-          {/* Kapatma ve Kaydet Butonları */}
           <div className="flex justify-between">
             <button
               type="button"

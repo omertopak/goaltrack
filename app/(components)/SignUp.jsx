@@ -20,10 +20,6 @@ const SignUp = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    // console.log("username:", formData.userName);
-    // console.log("Email:", formData.email);
-    // console.log("Password:", formData.password);
-    // console.log("confirmPassword:", formData.confirmPassword);
     if(formData.password===formData.confirmPassword){
       register(formData);
     }else{

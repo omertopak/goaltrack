@@ -19,8 +19,8 @@ const page = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("Email:", formData.email);
-    console.log("Password:", formData.password);
+    // console.log("Email:", formData.email);
+    // console.log("Password:", formData.password);
        login(formData.email,formData.password,)
   };
  

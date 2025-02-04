@@ -2,7 +2,7 @@ import { useState } from "react";
 import useChainStore from "@/lib/stores/chainStore";
 
 const AddChainModal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null; // Modal kapalıysa hiçbir şey gösterme
+  if (!isOpen) return null; 
     const {createChain} = useChainStore();
     const [chain, setChain] = useState("");
   
@@ -17,9 +17,7 @@ const AddChainModal = ({ isOpen, onClose }) => {
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-lg font-bold mb-4 text-gray-700 dark:text-slate-700">Add your new chain</h2>
 
-        {/* Form */}
         <form onSubmit={handleSubmit}>
-          {/* Input */}
           <input
             type="text"
             placeholder=""
@@ -29,7 +27,6 @@ const AddChainModal = ({ isOpen, onClose }) => {
             required
           />
 
-          {/* Kapatma ve Kaydet Butonları */}
           <div className="flex justify-between">
             <button
               type="button"

@@ -2,13 +2,11 @@
 import { useState, useEffect } from "react";
 
 const Page = () => {
-  const [workDuration, setWorkDuration] = useState(0.05 * 60); // Varsayılan 25 dakika
-  const [breakDuration, setBreakDuration] = useState(0.10 * 60); // Varsayılan 5 dakika
-  // const [workDuration, setWorkDuration] = useState(25 * 60); // Varsayılan 25 dakika
-  // const [breakDuration, setBreakDuration] = useState(5 * 60); // Varsayılan 5 dakika
-  const [isTimerRunning, setIsTimerRunning] = useState(false); // Timer'ın çalışıp çalışmadığını kontrol etmek için
-  const [timeRemaining, setTimeRemaining] = useState(workDuration); // Geriye kalan zamanı tutar
-  const [isBreakTime, setIsBreakTime] = useState(false); // Break zamanında olup olmadığını kontrol eder
+  const [workDuration, setWorkDuration] = useState(0.05 * 60); 
+  const [breakDuration, setBreakDuration] = useState(0.10 * 60); 
+  const [isTimerRunning, setIsTimerRunning] = useState(false); 
+  const [timeRemaining, setTimeRemaining] = useState(workDuration); 
+  const [isBreakTime, setIsBreakTime] = useState(false); 
   const [cycle, setCycle] = useState(1)
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,10 +41,10 @@ const Page = () => {
         });
       }, 1000);
     } else {
-      clearInterval(timer); // Timer durduğunda interval'ı temizle
+      clearInterval(timer); 
     }
 
-    return () => clearInterval(timer); // Cleanup
+    return () => clearInterval(timer); 
   }, [isTimerRunning, isBreakTime, workDuration, breakDuration]);
 
   const handleStartStop = () => {

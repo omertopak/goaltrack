@@ -13,7 +13,7 @@ import AddTodoModal from "../(components)/AddTodoModal";
 
 
 const Page = () => {
-
+  
   // ============================== store
   const { todos,getTodos, deleteTodo, updateTodo, priorityTodo } = useTodoStore();
 
@@ -26,7 +26,7 @@ const Page = () => {
   
   // ============================== Items and selectons
   const [selectedButton, setSelectedButton] = useState("all"); 
-  const [selectedButton2, setSelectedButton2] = useState("in Progress"); 
+  const [selectedButton2, setSelectedButton2] = useState("All"); 
   const handleClick = (buttonId, label) => {
     setSelectedButton(buttonId); 
     setSelectedButton2(label);
@@ -75,10 +75,10 @@ const Page = () => {
 
   return (
     <div className="flex w-full m-10">
-      <div className="w-3/4 h-full">
+      <div className="w-3/4 h-full overflow-scroll scrollbar-hide">
         <div className="w-full flex flex-col gap-3">
           <h2 className="text-3xl font-extrabold ">To Do List</h2>
-          <div className="flex items-center gap-3  ml-3 justify-between">
+          <div className="flex items-center gap-3  ml-3 justify-between ">
             <div className="flex items-center gap-3  ml-3">
               <FaListUl />
               <h4 className="text-xl font-extrabold">{selectedButton2}</h4>
@@ -89,7 +89,7 @@ const Page = () => {
               onClose={() => setIsModalOpen(false)}
             />
           </div>
-          <ul className="flex flex-col gap-2 ml-5 mr-10">
+          <ul className="flex flex-col gap-2 ml-5 mr-10 ">
             {renderData?.map((todo, index) => (
               <li
                 key={index}

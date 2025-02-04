@@ -5,7 +5,6 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import axios from 'axios';
 import Modal from '../(components)/Modal';
 import DeleteModal from '../(components)/DeleteModal';
 import useCalendarStore from "../../lib/stores/calendarStore";
@@ -36,15 +35,15 @@ const Calendar = () => {
   const handleDateClick = (arg) => {
     setSelectedDate(arg);
     setIsModalOpen(true);
-    console.log("handleClick calisti");
-    console.log("arg", arg);
+    // console.log("handleClick calisti");
+    // console.log("arg", arg);
   };
 
   // Yeni etkinlik ekle
   const handleSubmitEvent = async (e) => {
     e.preventDefault();
-    console.log("Seçilen Etkinlik ID:", newEventTitle);
-  console.log("Etkinlik Başlığı:",selectedDate);
+    // console.log("Seçilen Etkinlik ID:", newEventTitle);
+  // console.log("Etkinlik Başlığı:",selectedDate);
     if (newEventTitle && selectedDate) {
       try {
         const newEvent = {
@@ -67,9 +66,7 @@ const Calendar = () => {
   // Etkinlik sil
   const handleDeleteClick = async (e) => {
      e.preventDefault();
-    //  console.log(DeleteId);
      try {
-      // setDeleteId(DeleteId);
       deleteEvent(DeleteId)
       setCurrentEvents(events);
       handleDelCloseModal();
@@ -110,7 +107,6 @@ const Calendar = () => {
         end: resizeInfo.event.end
       };
       const resizeId = resizeInfo.event._def.extendedProps._id;
-      console.log("Güncellenmiş Etkinlik:", updatedEvent);
       await updateEvent(updatedEvent, resizeId);
       setCurrentEvents(events);
     } catch (error) {
@@ -162,20 +158,20 @@ const Calendar = () => {
             events={currentEvents}
             eventClassNames={["bg-slate-400", "hover:bg-slate-600",   "text-white", "font-bold","border-none"]}
             eventTimeFormat={{
-              hour: '2-digit',    // Saatin 2 haneli gösterimi
-              minute: '2-digit',  // Dakikanın 2 haneli gösterimi
-              meridiem: false     // "AM"/"PM" ekini kaldır
+              hour: '2-digit',    
+              minute: '2-digit',  
+              meridiem: false     
             }}
           />
         </div>
         <div className="w-1/4 h-full flex flex-col ">
           <div className="text-2xl font-extrabold">
-            Takvim Etkinlikleri
+            Events
           </div>
           <ul className="space-y-4 overflow-scroll scrollbar-hide mt-5">
             {currentEvents?.length <= 0 && (
               <div className="italic px-7 dark:text-gray-400 text-gray-700">
-                Etkinlik Bulunmuyor
+                There is no event.
               </div>
             )}
 
@@ -204,7 +200,7 @@ const Calendar = () => {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <div className="text-lg font-bold mb-4 text-gray-700 dark:text-slate-700">Add New Event</div>
+        <div className="text-lg font-bold mb-4 text-gray-700 dark:text-slate-700">Add a new event</div>
         <form onSubmit={handleSubmitEvent} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">

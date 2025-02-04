@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { GiBreakingChain } from "react-icons/gi";
-import ChainPage from "../(components)/ChainPage";
 import useChainStore from "@/lib/stores/chainStore";
 import AddChainModal from "../(components)/AddChainModal";
 import { MdDelete } from "react-icons/md";
@@ -33,7 +31,7 @@ const Page = () => {
         setNumber(updatedChain.dayNumber);
       }
     }
-  }, [chains]); // chains değiştiğinde çalışacak
+  }, [chains]); 
   
   
   
@@ -59,15 +57,6 @@ const Page = () => {
             <h2 className="h-full flex items-center justify-center text-9xl font-bold animate-bounce dark:text-slate-100 text-slate-800">
               {number}
             </h2>
-
-            {/* Hover edildiğinde görünen "Merhaba"
-            {number === "?" ? (
-              <></>
-            ) : (
-              <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 bg-gray-800 text-white text-xl px-4 py-2 rounded transition-opacity">
-                {message}
-              </div>
-            )} */}
           </div>
         </div>
       </div>
@@ -75,7 +64,6 @@ const Page = () => {
         <div className="flex flex-col text-start overflow-scroll scrollbar-hide">
           <div className="flex text-start items-center">
             <h2 className="text-2xl font-extrabold px-7">Chains</h2>
-            <GiBreakingChain className="text-3xl" />
           </div>
           <div className="overflow-scroll scrollbar-hide">
             <ul className="space-y-4">
