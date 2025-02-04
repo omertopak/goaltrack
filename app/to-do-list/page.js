@@ -83,12 +83,7 @@ const Page = () => {
               <FaListUl />
               <h4 className="text-xl font-extrabold">{selectedButton2}</h4>
             </div>
-            <button
-              className="bg-slate-400  dark:bg-zinc-950  text-black dark:text-gray-400 dark:border dark:border-gray-50 rounded-md font-bold py-2 px-4   items-center mr-7"
-              onClick={() => setIsModalOpen(true)}
-            >
-              + Add Todo
-            </button>
+            
             <AddTodoModal
               isOpen={isModalOpen}
               onClose={() => setIsModalOpen(false)}
@@ -138,8 +133,8 @@ const Page = () => {
           </ul>
         </div>
       </div>
-      <div className="w-1/4 h-full overflow-scroll scrollbar-hide">
-        <div className="flex flex-col text-start">
+      <div className="w-1/4 h-full  flex flex-col justify-between">
+        <div className="flex flex-col text-start overflow-scroll scrollbar-hide">
           <h2 className="text-2xl font-extrabold px-7">Status</h2>
           {renderButton("all", "All")}
           {renderButton("completed", "Completed")}
@@ -150,6 +145,12 @@ const Page = () => {
           {renderButton("medium", "Medium")}
           {renderButton("low", "Low")}
         </div>
+        <button
+              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  dark:border dark:border-gray-50 rounded-md"
+              onClick={() => setIsModalOpen(true)}
+            >
+              + Add Todo
+            </button>
       </div>
     </div>
   );

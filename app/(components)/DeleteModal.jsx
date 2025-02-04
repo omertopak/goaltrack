@@ -10,11 +10,11 @@ const DeleteModal = ({ isOpen, onClose, children }) => {
         />
         
         {/* Modal Content */}
-        <div className="relative bg-white rounded-lg p-6 shadow-xl min-w-[300px] max-w-md w-full m-4">
+        <div className="relative bg-white dark:bg-slate-100 rounded-lg p-6 shadow-xl min-w-[300px] max-w-md w-full m-4">
           {/* Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-black"
           >
             ✕
           </button>

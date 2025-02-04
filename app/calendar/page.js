@@ -17,7 +17,6 @@ const Calendar = () => {
   const [DeleteId, setDeleteId] = useState("");
   const [newEventTitle, setNewEventTitle] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
 
   const {isLoading,events,getEvents, createEvent,updateEvent,deleteEvent} = useCalendarStore();
   const sortedEvents = events?.sort((a, b) => new Date(a.start) - new Date(b.start));
@@ -31,7 +30,6 @@ const Calendar = () => {
   
   useEffect(() => {
     setCurrentEvents(events);
-    // console.log("events", events);  
   }, [events]); 
 
 
@@ -206,25 +204,25 @@ const Calendar = () => {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
-        <div className="text-lg font-bold mb-4">Yeni Etkinlik Ekle</div>
+        <div className="text-lg font-bold mb-4 text-gray-700 dark:text-slate-700">Add New Event</div>
         <form onSubmit={handleSubmitEvent} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Etkinlik Başlığı
+              Event Title
             </label>
             <input
               type="text"
               value={newEventTitle}
               onChange={(e) => setNewEventTitle(e.target.value)}
-              placeholder="Etkinlik başlığını girin"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+              placeholder=""
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-slate-800  bg-gray-100 dark:bg-slate-200 text-slate-600"
               disabled={isLoading}
             />
           </div>
           {selectedDate && (
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                Seçilen Tarih
+                Date:
               </label>
               <div className="mt-1 text-gray-600">
                 {new Date(selectedDate.date).toLocaleDateString(undefined, {
@@ -239,14 +237,14 @@ const Calendar = () => {
             <button
               type="button"
               onClick={handleCloseModal}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:bg-slate-200"
               disabled={isLoading}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  dark:border dark:border-gray-50 rounded-md"
+              className="bg-slate-400 hover:bg-slate-600 dark:text-slate-200 dark:bg-zinc-800  text-white font-bold py-2 px-4  dark:border dark:border-gray-400 rounded-md border-2 h-10"
               disabled={isLoading}
             >
               {isLoading ? 'Ekleniyor...' : 'Submit'}
@@ -255,18 +253,13 @@ const Calendar = () => {
         </form>
       </Modal>
       <DeleteModal isOpen={isDelModalOpen} onClose={handleDelCloseModal}>
-        <div className="text-lg font-bold mb-4">Etkinlik silinsin mi?</div>
+        <div className="text-lg font-bold mb-4 text-gray-700 dark:text-slate-700">Are you sure you want to delete the selected event?</div>
         <form onSubmit={handleDeleteClick} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-            Secilen tarihteki etkinlik silinsin mi?
-            </label>
-            
-          </div>
-          {selectedDate && (
+         
+        {selectedDate && (
             <div>
               <label className="block text-sm font-medium text-gray-700">
-                Seçilen Tarih
+                Date:
               </label>
               <div className="mt-1 text-gray-600">
                 {new Date(selectedDate.date).toLocaleDateString(undefined, {
@@ -277,21 +270,22 @@ const Calendar = () => {
               </div>
             </div>
           )}
+
           <div className="flex justify-end space-x-2 mt-4">
             <button
               type="button"
               onClick={handleDelCloseModal}
-              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 dark:bg-slate-200"
               disabled={isLoading}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="bg-slate-400 hover:bg-slate-600 dark:text-gray-400 dark:bg-zinc-950  text-white font-bold py-2 px-4  dark:border dark:border-gray-50 rounded-md"
+              className="bg-slate-400 hover:bg-slate-600 dark:text-slate-200 dark:bg-zinc-800  text-white font-bold py-2 px-4  dark:border dark:border-gray-400 rounded-md"
               disabled={isLoading}
             >
-              {isLoading ? 'Siliniyor...' : 'Submit'}
+              {isLoading ? 'Deleting...' : 'Submit'}
             </button>
           </div>
         </form>
