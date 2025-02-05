@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 import { usePathname } from 'next/navigation';
 import { AuthProvider } from "./(components)/AuthProvider";
 
+
 export default function RootLayout({ children }) {
   
   const pathname = usePathname();
