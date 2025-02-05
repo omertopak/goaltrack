@@ -191,7 +191,7 @@ const Calendar = () => {
                     })}
                   </label>
                 ) : (
-                  <label className="text-slate-950">Başlangıç tarihi yok</label>
+                  <label className="text-slate-950">No date</label>
                 )}
               </li>
             ))}
