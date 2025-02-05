@@ -3,6 +3,10 @@
 
 GoalTrack is a web application for task management and tracking progress. This project provides a backend built with **Node.js** and **Express.js**, using **MongoDB** as the database to store user data and tasks. The backend has been deployed to **Vercel** and connects to **MongoDB Atlas** for cloud database storage.
 
+## Demo
+
+You can check out a live demo of the project here: [GoalTrack Demo](https://goaltrack-nu.vercel.app/)
+
 ## Features
 
 - User authentication and registration
