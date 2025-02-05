@@ -184,7 +184,7 @@ const Calendar = () => {
                 <br />
                 {event.start ? (
                   <label className="text-gray-600 flex justify-end">
-                    {new Date(event.start).toLocaleDateString("tr-TR", {
+                    {new Date(event.start).toLocaleDateString(undefined, {
                       year: "numeric",
                       month: "short",
                       day: "numeric",
